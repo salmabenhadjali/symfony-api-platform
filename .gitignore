@@ -1,2 +1,6 @@
-doing
+##Project files
 php7-notions/vendor/*
+project/vendor/*
+
+##IDE files
+.idea/*
