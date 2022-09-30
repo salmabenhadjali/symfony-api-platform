@@ -95,7 +95,7 @@ class BlogPost
         return $this;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
