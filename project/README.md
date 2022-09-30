@@ -11,3 +11,6 @@
 - Preparing Entities with make
 - creating migration versionning
 - applying migration with doctrine
+- add entity properties if needed
+- create Controllers an Repository
+- 
