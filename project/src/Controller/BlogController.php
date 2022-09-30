@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\BlogPost;
 use App\Service\Serializer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,23 +37,23 @@ class BlogController extends AbstractController {
 
     /**
      * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+     * @ParamConverter("post", class="App\Entity\BlogPost")
      */
-    public function post($id)
+    public function post($post)
     {
-        return $this->json(
-            $this->getDoctrine()->getRepository(BlogPost::class)->find($id)
-        );
+        return $this->json($post);
     }
 
     /**
      * @Route("/post/{slug}", name="blog_by_slug")
+     *
+     * This annottaion is not required when $post is typed BlogPost
+     * and route parameter name matches any field on the BlogPost entity
+     * @ParamConverter("post", class="App\Entity\BlogPost", options={"mapping": {"slug": "author"}})
      */
-    public function postBySlug($slug)
+    public function postBySlug($post)
     {
-        return $this->json(
-            $this->getDoctrine()->getRepository(BlogPost::class)
-                ->findOneBy(["slug" => $slug])
-        );
+        return $this->json($post);
     }
 
     /**
