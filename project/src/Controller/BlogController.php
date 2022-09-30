@@ -36,7 +36,7 @@ class BlogController extends AbstractController {
     }
 
     /**
-     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"})
+     * @Route("/post/{id}", name="blog_by_id", requirements={"id"="\d+"}, methods={"GET"})
      * @ParamConverter("post", class="App\Entity\BlogPost")
      */
     public function post($post)
@@ -45,7 +45,7 @@ class BlogController extends AbstractController {
     }
 
     /**
-     * @Route("/post/{slug}", name="blog_by_slug")
+     * @Route("/post/{slug}", name="blog_by_slug", methods={"GET"})
      *
      * This annottaion is not required when $post is typed BlogPost
      * and route parameter name matches any field on the BlogPost entity
@@ -70,5 +70,17 @@ class BlogController extends AbstractController {
         $em->flush();
 
         return $this->json($blogPost);
+    }
+
+    /**
+     * @Route("/post/{id}", name="blog_post_delete", methods={"DELETE"})
+     */
+    public function delete(BlogPost $post)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($post);
+        $em->flush();
+
+        return $this->json(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -13,4 +13,6 @@
 - applying migration with doctrine
 - add entity properties if needed
 - create Controllers an Repository
-- 
+  - set methodes
+  - set routes / names / requirements / methods
+  - set ParamConverter
