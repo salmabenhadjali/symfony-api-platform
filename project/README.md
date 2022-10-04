@@ -16,3 +16,14 @@
   - set methodes
   - set routes / names / requirements / methods
   - set ParamConverter
+  
+  
+#Steps to create an API
+- install api platform
+    - composer require api
+- add all entities (user among)
+- add annotation to entities
+- add relations between classes
+- user should implements UserInterface interface
+- add pasword encryption on sercutity.yml file
+
