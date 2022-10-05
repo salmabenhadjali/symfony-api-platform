@@ -9,7 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={"get"},
+ *     collectionOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\BlogPostRepository")
  */
 class BlogPost
