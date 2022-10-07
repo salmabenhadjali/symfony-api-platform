@@ -26,4 +26,6 @@
 - add relations between classes
 - user should implements UserInterface interface
 - add pasword encryption on sercutity.yml file
-
+- add methods selection
+- add groups entity for normalization
+- add event subscriber for password encryption on prewrite
