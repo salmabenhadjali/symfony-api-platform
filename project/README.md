@@ -29,3 +29,5 @@
 - add methods selection
 - add groups entity for normalization
 - add event subscriber for password encryption on prewrite
+- add validator
+- add regex validator for password : www.regex101.com
