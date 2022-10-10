@@ -11,6 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^2.2",
         "doctrine/orm": "^2.13",
         "easycorp/easyadmin-bundle": "^2.3",
+        "lexik/jwt-authentication-bundle": "^2.16",
         "nelmio/cors-bundle": "^2.2",
         "phpdocumentor/reflection-docblock": "^4.3",
         "sensio/framework-extra-bundle": "^5.5",

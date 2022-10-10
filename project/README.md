@@ -31,3 +31,10 @@
 - add event subscriber for password encryption on prewrite
 - add validator
 - add regex validator for password : www.regex101.com
+- install api platform
+    - composer require lexik/jwt-authentication-bundle
+- add JWT management
+- cree private and publi key
+    - openssl genrsa -out config/jwt/private.pem -aes256 4096
+    - openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+- manage security actions : firewalls and access controls
