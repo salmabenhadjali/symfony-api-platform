@@ -6,7 +6,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -135,6 +134,7 @@ class BlogPost
 
     /**
      * @param User $author
+     * @return BlogPost
      */
     public function setAuthor(User $author): self
     {

@@ -5,8 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -92,7 +92,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author")
-     * @Groups("read")
+     * @Groups({"read"})
      */
     private $comments;
 
@@ -156,37 +156,20 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function getPosts()
+    public function getPosts(): Collection
     {
         return $this->posts;
     }
 
     /**
-     * @param mixed $posts
-     */
-    public function setPosts($posts): void
-    {
-        $this->posts = $posts;
-    }
-
-    /**
      * @return Collection
      */
-    public function getComments()
+    public function getComments(): Collection
     {
         return $this->comments;
     }
-
-    /**
-     * @param Collection
-     */
-    public function setComments($comments): void
-    {
-        $this->comments = $comments;
-    }
-
 
     /**
      * Returns the roles granted to the user.

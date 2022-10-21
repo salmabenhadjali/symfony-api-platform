@@ -6,6 +6,8 @@
 ####Applying migration
 - php bin/console doctrine:migration:migrate
 
+##Starting php server
+- php -S localhost:8080 -t public/
 
 #Steps to crete a new project
 - Preparing Entities with make
@@ -39,3 +41,5 @@
     - openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 - manage security actions : firewalls and access controls
 - add access to entities
+- add subscriber to hash password
+- add subscriber to put author as authenticated user
