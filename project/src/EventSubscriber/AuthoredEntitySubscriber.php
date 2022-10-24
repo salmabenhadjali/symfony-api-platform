@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\BlogPost;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 
 class AuthoredEntitySubscriber implements EventSubscriberInterface
