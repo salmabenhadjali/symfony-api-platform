@@ -14,15 +14,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     normalizationContext={"groups"={"get"}},
  *     itemOperations={
  *          "get"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *              "normalization_context"={
  *                  "groups"={"get"}
  *              }
  *          },
  *          "put"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object  == user"
+ *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object  == user",
  *              "denormalization_context"={
  *                  "groups"={"put"}
  *              }
