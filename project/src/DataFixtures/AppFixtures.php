@@ -18,6 +18,33 @@ class AppFixtures extends Fixture
      */
     private $passwordEncoder;
 
+    private const USERS = [
+        [
+            'name' => 'salma',
+            'email' => 'alma@bha.com',
+            'username' => 'salma.bha',
+            'password' => 'secretPassword1234',
+        ],
+        [
+            'name' => 'salma1',
+            'email' => 'salma1@bha.com',
+            'username' => 'salma1.bha',
+            'password' => 'secretPassword12341',
+        ],
+        [
+            'name' => 'salma2',
+            'email' => 'salma2@bha.com',
+            'username' => 'salma2.bha',
+            'password' => 'secretPassword12342',
+        ],
+        [
+            'name' => 'salma3',
+            'email' => 'salma3@bha.com',
+            'username' => 'salma3.bha',
+            'password' => 'secretPassword12343',
+        ],
+    ];
+
     /**
      * @var \Faker\Factory
      */
@@ -40,8 +67,9 @@ class AppFixtures extends Fixture
 
     public function loadBlogPosts(ObjectManager $manager)
     {
-        $user = $this->getReference('admin');
         for ($i = 0; $i < 100; $i++) {
+            $user = $this->getRandonUserReference();
+
             $blogPost = new BlogPost();
             $blogPost->setTitle($this->faker->realText(12));
             $blogPost->setPublished($this->faker->dateTimeThisYear);
@@ -58,10 +86,10 @@ class AppFixtures extends Fixture
 
     public function loadComments(ObjectManager $manager)
     {
-        $user = $this->getReference('admin');
-
         for ($i = 0; $i < 100 ; $i++) {
             for ($j = 0; $j < rand(1, 10) ; $j++) {
+                $user = $this->getRandonUserReference();
+
                 $comment = new Comment();
                 $comment->setAuthor($user);
                 $comment->setContent($this->faker->realText(20));
@@ -78,18 +106,28 @@ class AppFixtures extends Fixture
 
     public function loadUsers(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setName('salma');
-        $user->setEmail('salma@bha.com');
-        $user->setUsername('salma.bha');
-        $user->setPassword($this->passwordEncoder->encodePassword(
-            $user,
-            'secretPassword1234'
-        ));
+        foreach (self::USERS as $userFixture) {
+            $user = new User();
+            $user->setName($userFixture['name']);
+            $user->setEmail($userFixture['email']);
+            $user->setUsername($userFixture['username']);
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                $userFixture['password']
+            ));
 
-        $this->addReference('admin', $user);
+            $this->addReference('user_'.$userFixture['username'], $user);
 
-        $manager->persist($user);
+            $manager->persist($user);
+        }
         $manager->flush();
+    }
+
+    /**
+     * @return User
+     */
+    public function getRandonUserReference(): User
+    {
+        return $this->getReference('user_' . self::USERS[rand(0, 3)]['username']);
     }
 }
