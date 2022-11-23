@@ -5,6 +5,12 @@
 - php bin/console make:migration
 ####Applying migration
 - php bin/console doctrine:migration:migrate
+####Applying faker
+- composer require --dev fzaninotto/faker
+- php bin/console doctrine:migration:migrate
+
+####Applying fixtures
+- php bin/console doctrine:fixtures:load
 
 ##Starting php server
 - php -S localhost:8080 -t public/
