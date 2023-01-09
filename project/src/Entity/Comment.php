@@ -11,6 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     denormalizationContext={
+ *          "groups"={"post"}
+ *     },
+ *     subresourceOperations={
+ *          "api_blog_posts_comments_get_subresource"={
+*               "normalization_context"={"groups"={"get-comment-with-author"}}
+ *          }
+ *     },
  *     itemOperations={
  *          "get",
  *          "put"={
@@ -21,15 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "get",
  *          "post"={
  *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')"
- *          },
- *          "api_blog_posts_comments_get_subresource"={
- *              "normalization_context"={
- *                  "groups"={"get-comment-with-author"}
- *              }
  *          }
- *     },
- *     denormalizationContext={
- *          "groups"={"post"}
  *     }
  * )
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -63,7 +63,7 @@ class Comment implements
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"get-comment-with-author"})
+     * @Groups({"post", "get-comment-with-author"})
      */
     private $author;
 

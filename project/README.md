@@ -8,9 +8,16 @@
 ####Applying faker
 - composer require --dev fzaninotto/faker
 - php bin/console doctrine:migration:migrate
-
 ####Applying fixtures
 - php bin/console doctrine:fixtures:load
+
+##Debug
+###Routes list
+- php bin/console debug:router
+###Services list
+- bin/console debug:container
+###Specific service info
+- php bin/console debug:container <service_name>
 
 ##Starting php server
 - php -S localhost:8080 -t public/
@@ -42,7 +49,7 @@
 - install api platform
     - composer require lexik/jwt-authentication-bundle
 - add JWT management
-- cree private and publi key
+- create private and public key
     - openssl genrsa -out config/jwt/private.pem -aes256 4096
     - openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
 - manage security actions : firewalls and access controls

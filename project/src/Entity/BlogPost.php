@@ -13,6 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     subresourceOperations={
+ *          "comments_get_subresource"={
+ *              "method"="GET",
+ *          },
+ *     },
  *     itemOperations={
  *          "get"={
  *              "normalization_context"={
@@ -165,9 +170,6 @@ class BlogPost implements
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getComments(): Collection
     {
         return $this->comments;
