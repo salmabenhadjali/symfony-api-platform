@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
     private const USERS = [
         [
             'name' => 'salma',
-            'email' => 'alma@bha.com',
+            'email' => 'salma@bha.com',
             'username' => 'salma.bha',
             'password' => 'secretPassword1234',
             'roles' => [User::ROLE_SUPERADMIN],

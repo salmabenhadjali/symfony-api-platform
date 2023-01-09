@@ -30,4 +30,4 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Serializer\UserContextBuilder:
         decorates: 'api_platform.serializer.context_builder'
-        argumens: ['@App\Serializer\UserContextBuilder.inner']
+        arguments: ['@App\Serializer\UserContextBuilder.inner']

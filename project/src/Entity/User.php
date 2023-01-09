@@ -121,6 +121,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="simple_array", length=200)
+     * @Groups({"get-admin"})
      */
     private $roles;
 
