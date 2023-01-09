@@ -58,3 +58,5 @@
 - add subscriber to put author as authenticated user
 - make user and blogpost modified only by owner
 - refine groups on user for GET/POST/PUT
+- add roles
+- 
