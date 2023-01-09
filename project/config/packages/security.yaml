@@ -37,3 +37,9 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    role_hierarchy:
+        ROLE_WRITER: ROLE_COMMENTATOR
+        ROLE_EDITOR: [ROLE_WRITER, ROLE_COMMENTATOR]
+        ROLE_ADMIN: [ROLE_EDITOR, ROLE_WRITER, ROLE_COMMENTATOR]
+        ROLE_SUPERADMIN: [ROLE_ADMIN, ROLE_EDITOR, ROLE_WRITER, ROLE_COMMENTATOR]
+
