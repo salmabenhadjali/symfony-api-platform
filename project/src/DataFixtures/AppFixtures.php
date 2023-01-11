@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\BlogPost;
 use App\Entity\Comment;
 use App\Entity\User;
+use App\Security\TokenGenerator;
+use App\Security\UserEnabledChecker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,6 +27,7 @@ class AppFixtures extends Fixture
             'username' => 'salma.bha',
             'password' => 'secretPassword1234',
             'roles' => [User::ROLE_SUPERADMIN],
+            'enabled' => true,
         ],
         [
             'name' => 'salma1',
@@ -32,6 +35,7 @@ class AppFixtures extends Fixture
             'username' => 'salma1.bha',
             'password' => 'secretPassword12341',
             'roles' => [User::ROLE_ADMIN],
+            'enabled' => false,
         ],
         [
             'name' => 'salma2',
@@ -39,6 +43,7 @@ class AppFixtures extends Fixture
             'username' => 'salma2.bha',
             'password' => 'secretPassword12342',
             'roles' => [User::ROLE_WRITER],
+            'enabled' => true,
         ],
         [
             'name' => 'salma3',
@@ -46,6 +51,7 @@ class AppFixtures extends Fixture
             'username' => 'salma3.bha',
             'password' => 'secretPassword12343',
             'roles' => [User::ROLE_EDITOR],
+            'enabled' => false,
         ],
     ];
 
@@ -53,11 +59,19 @@ class AppFixtures extends Fixture
      * @var \Faker\Factory
      */
     private $faker;
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(
+        UserPasswordEncoderInterface $passwordEncoder,
+        TokenGenerator $tokenGenerator
+    )
     {
         $this->passwordEncoder = $passwordEncoder;
         $this->faker = \Faker\Factory::create();
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function load(ObjectManager $manager): void
@@ -119,7 +133,11 @@ class AppFixtures extends Fixture
                 $userFixture['password']
             ));
             $user->setRoles($userFixture['roles']);
-            $user->setEnabled(true);
+            $user->setEnabled($userFixture['enabled']);
+
+            if (!$user->getEnabled()) {
+                $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken());
+            }
 
             $this->addReference('user_'.$userFixture['username'], $user);
 
